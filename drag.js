@@ -38,7 +38,7 @@ function setDragonDrop(el) {
     ref = this;
   });
 
-  // if an element is dropped on this element, put the new el on screen
+  // if an element is dropped on ours, put the new el on screen
   el.addEventListener('drop', function(e) {
     var data = e.dataTransfer.getData('text/html')
       , li = document.createElement('li')
@@ -52,7 +52,8 @@ function setDragonDrop(el) {
     li.className = draggableClassname;
     setDragonDrop(li);
 
-    if ( e.screenY > elHalfway ) {
+    // determine whether to put the new el before or after the current one
+    if ( e.screenY <= elHalfway ) {
       insertBefore(this, li);
     } else {
       insertAfter(this, li);
